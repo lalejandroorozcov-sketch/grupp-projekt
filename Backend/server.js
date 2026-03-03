@@ -16,6 +16,39 @@ app.use(express.json())
 
 const PORT = 8080
 
+app.post('/addTodo', async (req, res) => {
+
+    try {
+
+        const { title, completed } = req.body
+
+        if (!title || title.trim() == '') {
+
+            return res.status(400).send('Title saknas')
+
+        }
+
+        const newTodo = {
+            title: title,
+            completed: completed || false,
+            createdAt: admin.firestore.FieldValue.serverTimestamp()
+        }
+
+        const docRef = await db.collection('Todos').add(newTodo)
+
+        res.status(200).json({
+            id: docRef.id,
+            ...newTodo.data()
+        })
+
+    } catch (error) {
+
+        res.status(500).send('Något gick fel.')
+
+    }
+
+})
+
 app.listen(PORT, () => {
     console.log(`Servern körs på https://localhost:${PORT}`)
 })
