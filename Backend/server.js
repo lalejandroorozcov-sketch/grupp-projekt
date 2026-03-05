@@ -31,6 +31,8 @@ app.put('/update/todo/:id', async (req, res) => {
     } catch (error) {
 
         res.status(500).send('Could not update, try again.')
+    }
+})
 app.get('/getTodos', async (req, res) => {
 
     try {
@@ -63,5 +65,5 @@ app.get('/getTodos', async (req, res) => {
 })
 
 app.listen(PORT, () => {
-    console.log(`Servern körs på https://localhost:${PORT}`)
+    console.log(`Servern körs på http://localhost:${PORT}`)
 })
