@@ -29,16 +29,16 @@ app.post('/addTodo', async (req, res) => {
         }
 
         const newTodo = {
-            title: title,
+            title,
             completed: completed || false,
             createdAt: admin.firestore.FieldValue.serverTimestamp()
         }
 
         const docRef = await db.collection('Todos').add(newTodo)
 
-        res.status(200).json({
+        res.status(201).json({
             id: docRef.id,
-            ...newTodo.data()
+            ...newTodo,
         })
 
     } catch (error) {
@@ -50,5 +50,5 @@ app.post('/addTodo', async (req, res) => {
 })
 
 app.listen(PORT, () => {
-    console.log(`Servern körs på https://localhost:${PORT}`)
+    console.log(`Servern körs på http://localhost:${PORT}`)
 })
