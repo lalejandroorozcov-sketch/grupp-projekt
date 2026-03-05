@@ -73,7 +73,7 @@ app.post('/addTodos', async (req, res) => {
 
     } catch (error) {
 
-        res.status(500).send('Could not add todo, try agian later.')
+        res.status(500).send('Could not add todo, try again later.')
 
     }
 
