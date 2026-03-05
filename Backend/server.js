@@ -31,6 +31,32 @@ app.put('/update/todo/:id', async (req, res) => {
     } catch (error) {
 
         res.status(500).send('Could not update, try again.')
+app.get('/getTodos', async (req, res) => {
+
+    try {
+
+        const todoCollection = db.collection('Todos')
+        const snapshot = await todoCollection.get()
+
+        if (snapshot.empty) {
+
+            return res.status(200).json([])
+        }
+
+        const todos = []
+
+        snapshot.forEach((todo) => {
+            todos.push({
+                id: todo.id,
+                ...todo.data()
+            })
+        })
+
+        res.status(200).json(todos)
+
+    } catch (error) {
+
+        res.status(500).send('Somthing is wrong in the server, try again later.')
 
     }
 
