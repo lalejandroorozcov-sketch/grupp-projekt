@@ -1,9 +1,9 @@
-function List() {
+function List({ todos }) {
   return (
     <>
       <ul className="todoList">
-        {todos.map((todo, index) => (
-          <li key={index}>{todo}</li>
+        {todos.map((todo) => (
+          <li key={todo.id}>{todo.title}</li>
         ))}
       </ul>
     </>
