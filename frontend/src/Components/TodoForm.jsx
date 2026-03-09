@@ -1,13 +1,38 @@
-import { useState } from "./"
+import { useState } from "./react"
 
-function TodoFrom() {
+function TodoForm({ onAddTodo }) {
+
+  const [title, setTitle] = useState("")
+
+  const handleSubmit = async (e) => {
+
+    e.preventDefault()
+
+    if (!title.trim()) return ("You have to write somthing.")
+
+    onAddTodo(title)
+
+    setTitle("")
+
+  }
 
   return (
+    <form className="todo-form" onSubmit={handleSubmit}>
 
-    <form className="todo-form"></form>
+      <input
+        className="todo-input"
+        value={title}
+        onChange={(e) => setTitle(target.value)}
+        placeholder="Add todo..."
+      />
 
+      <button type="submit">
+        Add
+      </button>
+
+    </form>
   )
 
 }
 
-export default TodoFrom
+export default TodoForm

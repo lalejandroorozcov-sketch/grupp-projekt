@@ -1,5 +1,8 @@
 function Title(props) {
-    return <h1>{props.titleText}</h1>
+
+    return (
+        <h1>Todo App</h1>
+    )
 }
 
-export default Title;
+export default Title
