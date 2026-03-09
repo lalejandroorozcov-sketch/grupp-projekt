@@ -14,25 +14,35 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-const PORT = 8080
+const PORT =
 
-app.delete('/deleteTodo/:id', async (req, res) => {
+    app.get('/getTodo', async (req, res) => {
 
-    try {
+        try {
 
-        const todoID = req.params.id
+            const todocollection = db.collection('Todos')
+            const snapshot = await todocollection.get()
 
-        await db.collection('Todos').doc(todoID).delete()
+            if (snapshot.empty) {
+                return res.status(200).json([])
+            }
 
-        res.status(200).send('Delete suecces.')
+            const todos = []
 
-    } catch (error) {
+            snapshot.forEach((todo) => {
+                todos.push({
+                    id: todo.id,
+                    ...todo.data(),
+                })
+            })
 
-        res.status(500).send('Could not delete todo.')
+            res.status(200).json(todos)
 
-    }
+        } catch (error) {
 
-})
+            res.status(500).send('Somthing wrong with the server.')
+        }
+    })
 
 app.post('/addTodos', async (req, res) => {
 
@@ -61,6 +71,41 @@ app.post('/addTodos', async (req, res) => {
     } catch (error) {
 
         res.status(500).send('Could not add todo, try again later.')
+
+    }
+
+})
+
+app.put('/updateTodo/:id', async (req, res) => {
+
+    try {
+
+        const todoID = req.params.id
+        const updates = req.body
+
+        const todoRef = db.collection('Todos').doc(todoID)
+        await todoRef.set(updates, { merge: true })
+
+    } catch (error) {
+
+        res.status(500).send('Could update, try again later!')
+
+    }
+})
+
+app.delete('/deleteTodo/:id', async (req, res) => {
+
+    try {
+
+        const todoID = req.params.id
+
+        await db.collection('Todos').doc(todoID).delete()
+
+        res.status(200).send('Delete suecces.')
+
+    } catch (error) {
+
+        res.status(500).send('Could not delete todo.')
 
     }
 
