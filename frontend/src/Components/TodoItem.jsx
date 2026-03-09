@@ -1,20 +1,20 @@
 import Checkbox from "./Checkbox"
+import DeleteButton from "./DeleteButton"
 
 function TodoItem({ todo, onDelete }) {
   return (
     <li>
+      <Checkbox></Checkbox>
       <span
         onClick={() => (todo.id, todo.completed)}
         sytle={{
           textDecoration: todo.complited ? "line-through" : "none",
         }}
       >
-        <Checkbox></Checkbox>
-
         {todo.title}
       </span>
 
-      <button onClick={() => onDelete(todo.id)}>Delete</button>
+      <DeleteButton />
     </li>
   )
 }
