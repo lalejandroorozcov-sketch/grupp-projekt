@@ -8,7 +8,8 @@ function App() {
     <>
       <Title></Title>
 
-      <TodoFrom onAddTodo={handleAddTodo} ></TodoFrom>
+      <TodoForm onAddTodo={handleAddTodo} ></TodoForm>
+      <TodoList todos={todos} />
     </>
   )
 }
