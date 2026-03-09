@@ -1,5 +1,5 @@
 import Checkbox from "./Checkbox"
-import DeleteButton from "./DeleteButton"
+import DeleteButton from "./Deletebutton"
 
 function TodoItem({ todo, onDelete }) {
   return (
