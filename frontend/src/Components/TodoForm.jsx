@@ -1,9 +1,13 @@
-// skriv in nya todos och skickar dem
-
 import { useState } from "./"
 
 function TodoFrom() {
-  return <></>
+
+  return (
+
+    <form className="todo-form"></form>
+
+  )
+
 }
 
 export default TodoFrom
