@@ -1,6 +1,6 @@
-import { useState } from "./"
+import { useState } from "./react"
 
-function TodoFrom({ onAddTodo }) {
+function TodoForm({ onAddTodo }) {
 
   const [title, setTitle] = useState("")
 
@@ -35,4 +35,4 @@ function TodoFrom({ onAddTodo }) {
 
 }
 
-export default TodoFrom
+export default TodoForm
