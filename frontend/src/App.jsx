@@ -1,14 +1,25 @@
+import { useState } from 'react'
 import './App.css'
-import TodoFrom from './Components/TodoForm'
+import TodoForm from './Components/TodoForm'
 import Title from './Components/Title'
+import TodoList from './Components/TodoList'
 
 function App() {
+  const [todos, setTodos] = useState([]);
+
+  const handleAddTodo = (newTodo) => {
+    setTodos(prevTodos => [...prevTodos, {
+      id: Date.now(),
+      text: newTodo,
+      completed: false
+    }]);
+  };
 
   return (
     <>
-      <Title></Title>
-
-      <TodoFrom></TodoFrom>
+      <Title />
+      <TodoForm onAddTodo={handleAddTodo} />
+      <TodoList todos={todos} />
     </>
   )
 }
