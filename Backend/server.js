@@ -64,6 +64,38 @@ app.get('/getTodos', async (req, res) => {
 
 })
 
+app.post('/addTodos', async (req, res) => {
+
+    try {
+
+        const { title, completed } = req.body
+
+        if (!title || title.trim() == "") {
+
+            return res.status(400).send('Title are missing, try again.')
+        }
+
+        const newTodo = {
+            title,
+            completed: completed || false,
+            createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        }
+
+        const docRef = db.collection('Todos').add(newTodo)
+
+        res.status(200).json({
+            id: docRef.id,
+            ...newTodo,
+        })
+
+    } catch (error) {
+
+        res.status(500).send('Could not add todo, try again later.')
+
+    }
+
+})
+
 app.listen(PORT, () => {
     console.log(`Servern körs på http://localhost:${PORT}`)
 })
