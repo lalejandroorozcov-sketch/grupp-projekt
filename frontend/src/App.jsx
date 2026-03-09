@@ -8,7 +8,7 @@ function App() {
     <>
       <Title></Title>
 
-      <TodoFrom onAddTodo={handleAddTodo} ></TodoFrom>
+      <TodoFrom></TodoFrom>
     </>
   )
 }
