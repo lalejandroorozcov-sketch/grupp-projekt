@@ -22,7 +22,7 @@ function TodoForm({ onAddTodo }) {
       <input
         className="todo-input"
         value={title}
-        onChange={(e) => setTitle(target.value)}
+        onChange={(e) => setTitle(e.target.value)}
         placeholder="Add todo..."
       />
 
