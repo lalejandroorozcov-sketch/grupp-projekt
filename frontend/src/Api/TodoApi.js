@@ -8,7 +8,7 @@ export const getTodos = async () => {
 
 export const addTodo = async (todo) => {
 
-    const response = await fetch(`${baseApi_url}/addTodo`, {
+    const response = await fetch(`${baseApi_url}/addTodos`, {
         method: "POST",
         headers: { "Content-Type": "application/json", },
         body: JSON.stringify(todo),
@@ -21,15 +21,18 @@ export const updateTodo = async (id, updates) => {
 
     await fetch(`${baseApi_url}/updateTodo/${id}`, {
         method: "PUT",
-        headers: { "Content-Typ": "application/json", },
+        headers: { "Content-Type": "application/json", },
         body: JSON.stringify(updates),
     })
 
 }
 
 export const deleteTodo = async (id) => {
-
-    await fetch(`${baseApi_url}/deletedTodo/${id}`, {
+    const response = await fetch(`${baseApi_url}/deleteTodo/${id}`, {
         method: "DELETE",
-    })
+    });
+
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
 }
