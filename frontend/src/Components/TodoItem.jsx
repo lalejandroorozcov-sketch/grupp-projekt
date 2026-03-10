@@ -14,7 +14,7 @@ function TodoItem({ todo, onDelete }) {
         {todo.text}
       </span>
 
-      <DeleteButton />
+      <DeleteButton id={todo.id} onDelete={onDelete} />
     </li>
   )
 }

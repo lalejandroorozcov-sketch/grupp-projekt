@@ -14,35 +14,35 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-const PORT =
+const PORT = 8080
 
-    app.get('/getTodo', async (req, res) => {
+app.get('/getTodo', async (req, res) => {
 
-        try {
+    try {
 
-            const todocollection = db.collection('Todos')
-            const snapshot = await todocollection.get()
+        const todocollection = db.collection('Todos')
+        const snapshot = await todocollection.get()
 
-            if (snapshot.empty) {
-                return res.status(200).json([])
-            }
-
-            const todos = []
-
-            snapshot.forEach((todo) => {
-                todos.push({
-                    id: todo.id,
-                    ...todo.data(),
-                })
-            })
-
-            res.status(200).json(todos)
-
-        } catch (error) {
-
-            res.status(500).send('Somthing wrong with the server.')
+        if (snapshot.empty) {
+            return res.status(200).json([])
         }
-    })
+
+        const todos = []
+
+        snapshot.forEach((todo) => {
+            todos.push({
+                id: todo.id,
+                ...todo.data(),
+            })
+        })
+
+        res.status(200).json(todos)
+
+    } catch (error) {
+
+        res.status(500).send('Somthing wrong with the server.')
+    }
+})
 
 app.post('/addTodos', async (req, res) => {
 
