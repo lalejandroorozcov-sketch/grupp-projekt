@@ -1,6 +1,6 @@
 import { useState, useEffect} from "react";
 
-function Checkbox(){
+function Checkbox({ todo }){
 
   const [checked, setChecked] = useState(false);
 

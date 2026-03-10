@@ -1,12 +1,13 @@
-function DeleteButton(props) {
+function DeleteButton({ id, onDelete }) {
+const baseApi_url = "http://localhost:8080"
   const handleDelete = async () => {
     try {
-      const response = await fetch(`${api_url}/deleteTodo/${props.id}`, {
+      const response = await fetch(`${baseApi_url}/deleteTodo/${id}`, {
         method: "DELETE",
       })
 
       if (response.ok) {
-        props.onDelete(props.id)
+        onDelete(id)
       }
     } catch (error) {
       console.log("Fel vid borttagning av todo")

@@ -4,17 +4,17 @@ import DeleteButton from "./Deletebutton"
 function TodoItem({ todo, onDelete }) {
   return (
     <li>
-      <Checkbox></Checkbox>
+      <Checkbox todo={todo} />
       <span
         onClick={() => (todo.id, todo.completed)}
-        sytle={{
-          textDecoration: todo.complited ? "line-through" : "none",
+        style={{
+          textDecoration: todo.completed ? "line-through" : "none",
         }}
       >
-        {todo.title}
+        {todo.text}
       </span>
 
-      <DeleteButton />
+      <DeleteButton id={todo.id} onDelete={onDelete} />
     </li>
   )
 }

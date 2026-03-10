@@ -15,11 +15,15 @@ function App() {
     }]);
   };
 
+  const handleDeleteTodo = (id) => {
+    setTodos(prevTodos => prevTodos.filter(todo => todo.id !== id));
+  };
+
   return (
     <>
       <Title />
       <TodoForm onAddTodo={handleAddTodo} />
-      <TodoList todos={todos} />
+      <TodoList todos={todos} onDelete={handleDeleteTodo} />
     </>
   )
 }
