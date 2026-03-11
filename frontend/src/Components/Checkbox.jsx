@@ -1,19 +1,7 @@
-import { useState, useEffect } from "react";
-
 function Checkbox({ todo, onUpdate }) {
-    const [checked, setChecked] = useState(todo.completed);
-
-    useEffect(() => {
-        setChecked(todo.completed);
-    }, [todo.completed]);
-
     const handleChange = (e) => {
-        const newChecked = e.target.checked;
-        setChecked(newChecked);
-
-        // Uppdatera backend
         if (onUpdate) {
-            onUpdate(todo.id, { completed: newChecked });
+            onUpdate(todo.id, { completed: e.target.checked });
         }
     };
 
@@ -21,7 +9,7 @@ function Checkbox({ todo, onUpdate }) {
         <input
             type="checkbox"
             className="checkbox"
-            checked={checked}
+            checked={todo.completed || false}
             onChange={handleChange}
         />
     );
