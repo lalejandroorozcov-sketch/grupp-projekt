@@ -21,7 +21,8 @@ app.get('/getTodo', async (req, res) => {
     try {
 
         const todocollection = db.collection('Todos')
-        const snapshot = await todocollection.get()
+        // Sortera efter skapelsedatum (äldsta först)
+        const snapshot = await todocollection.orderBy('createdAt', 'asc').get()
 
         if (snapshot.empty) {
             return res.status(200).json([])
@@ -61,12 +62,16 @@ app.post('/addTodos', async (req, res) => {
             createdAt: admin.firestore.FieldValue.serverTimestamp(),
         }
 
-        const docRef = db.collection('Todos').add(newTodo)
+        const docRef = await db.collection('Todos').add(newTodo)
 
-        res.status(200).json({
-            id: docRef.id,
-            ...newTodo,
-        })
+        // Läs tillbaka det sparade objektet för att få rätt data
+        const savedDoc = await docRef.get()
+        const savedTodo = {
+            id: savedDoc.id,
+            ...savedDoc.data()
+        }
+
+        res.status(200).json(savedTodo)
 
     } catch (error) {
 

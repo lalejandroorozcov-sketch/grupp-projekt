@@ -13,7 +13,11 @@ function App() {
     const loadTodos = async () => {
       try {
         const todosFromBackend = await getTodos();
-        setTodos(todosFromBackend);
+        // Extra säkerhet: sortera även i frontend
+        const sortedTodos = todosFromBackend.sort((a, b) => {
+          return new Date(a.createdAt?.seconds * 1000 || 0) - new Date(b.createdAt?.seconds * 1000 || 0);
+        });
+        setTodos(sortedTodos);
       } catch (error) {
         console.log('Kunde inte ladda todos från backend');
       }
@@ -32,12 +36,19 @@ function App() {
     }
   };
 
-  const handleUpdateTodo = async (id, updates) =>{
+  const handleUpdateTodo = async (id, updates) => {
+    // ⚡ OPTIMISTIC UPDATE: Uppdatera UI direkt
+    setTodos(prevTodos => prevTodos.map(todo =>
+      todo.id === id ? { ...todo, ...updates } : todo
+    ));
+
     try {
+      // ⏳ Uppdatera backend i bakgrunden
       await apiUpdateTodo(id, updates);
-      setTodos(prevTodos => prevTodos.map(todo => todo.id === id ? { ...todo, ...updates } : todo));
+      // ✅ Om backend lyckas, behöver vi inte göra något mer
     } catch (error) {
-      
+      console.log("FEL vid update:", error);
+      // 🔙 TODO: Återställ ändringen om backend misslyckas
     }
   }
 
