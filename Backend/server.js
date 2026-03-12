@@ -98,6 +98,31 @@ app.put('/updateTodo/:id', async (req, res) => {
     }
 })
 
+app.put('/changeTodo/:id', async (req, res)=> {
+    try {
+        const todoID = req.params.id
+        const newTitle = req.body.title
+
+        if (!newTitle || newTitle.trim()=== "") {
+            return res.status(400).send('No new todo title provided.')
+        }
+
+        const todoRef = db.collection('Todos').doc(todoID)
+        await todoRef.set({title: newTitle}, {merge: true})
+
+        const changedDoc = await todoRef.get()
+        const changedTodo = {
+            id: changedDoc.id,
+            ...changedDoc.data()
+        }
+
+        res.status(200).json(changedTodo)
+
+    } catch (error) {
+       res.status(500).send('Could not change todo title.')
+    }
+})
+
 app.delete('/deleteTodo/:id', async (req, res) => {
 
     try {
