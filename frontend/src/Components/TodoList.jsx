@@ -6,7 +6,7 @@ function TodoList({ todos, onDelete, onUpdate }) {
         <>
             <ul className="todoList">
                 {todos.map((todo) => (
-                    <TodoItem key={todo.id} todo={todo} onDelete={onDelete} onUpdate={onUpdate} />
+                    <TodoItem key={todo.id} todo={todo} onDelete={onDelete} onUpdate={onUpdate} onChangeTodo={onChangeTodo} />
                 ))}
             </ul>
         </>
