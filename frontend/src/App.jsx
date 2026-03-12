@@ -3,7 +3,7 @@ import './App.css'
 import TodoForm from './Components/TodoForm'
 import Title from './Components/Title'
 import TodoList from './Components/TodoList'
-import { getTodos, addTodo as apiAddTodo, deleteTodo as apiDeleteTodo, updateTodo as apiUpdateTodo } from './Api/TodoApi'
+import { getTodos, addTodo as apiAddTodo, deleteTodo as apiDeleteTodo, updateTodo as apiUpdateTodo, changeTodo as apiChangeTodo} from './Api/TodoApi'
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -63,11 +63,23 @@ function App() {
     }
   };
 
+  const handleChangeTodo = async (id, newTitle) => {
+    setTodos(prevTodos => prevTodos.map(todo =>
+      todo.id === id ? { ...todo, title: newTitle } : todo
+    ));
+
+    try {
+      await apiChangeTodo(id, newTitle)
+    } catch (error) {
+      console.log("Fel vid ändring:", error);
+    }
+  }
+
   return (
     <>
       <Title />
       <TodoForm onAddTodo={handleAddTodo} />
-      <TodoList todos={todos} onDelete={handleDeleteTodo} onUpdate={handleUpdateTodo} />
+      <TodoList todos={todos} onDelete={handleDeleteTodo} onUpdate={handleUpdateTodo} onChangeTodo={handleChangeTodo}/>
     </>
   )
 }

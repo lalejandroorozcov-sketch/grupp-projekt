@@ -1,14 +1,16 @@
 import Checkbox from "./Checkbox"
 import DeleteButton from "./Deletebutton"
 
-function TodoItem({ todo, onDelete, onUpdate }) {
+function TodoItem({ todo, onDelete, onUpdate, onChangeTodo }) {
   return (
     <li>
       <Checkbox todo={todo} onUpdate={onUpdate} />
       <span
-        onClick={() => (todo.id, todo.completed)}
-        style={{
-          textDecoration: todo.completed ? "line-through" : "none",
+        onDoubleClick={() => {
+          const newTitle = prompt("Uppdatera din todo", todo.title);
+          if (newTitle && newTitle.trim() !== ""){
+            onChangeTodo(todo.id, newTitle)
+          }
         }}
       >
         {todo.title}
