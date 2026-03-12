@@ -36,3 +36,13 @@ export const deleteTodo = async (id) => {
         throw new Error(`HTTP error! status: ${response.status}`);
     }
 }
+
+export const changeTodo = async (id, newTitle) => {
+
+    const response = await fetch (`${baseApi_url}/changeTodo/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json", },
+        body: JSON.stringify({title: newTitle})
+    })
+    return response.json()
+}
