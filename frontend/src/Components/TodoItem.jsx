@@ -1,21 +1,37 @@
+import { useState } from "react";
 import Checkbox from "./Checkbox"
 import DeleteButton from "./Deletebutton"
 
 function TodoItem({ todo, onDelete, onUpdate, onChangeTodo }) {
+const [isEditing, setIsEditing] = useState(false)
+const [editValue, setEditValue] = useState(todo.title)
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  if (editValue.trim() !== "") {
+    onChangeTodo(todo.id, editValue.trim());
+    setIsEditing(false);
+  }
+}
+
+
   return (
     <li>
       <Checkbox todo={todo} onUpdate={onUpdate} />
+      {isEditing ? (
+        <form onSubmit={handleSubmit}>
+        <input 
+        type="text"
+        value={editValue}
+        onChange={(e) => setEditValue(e.target.value)}
+        />
+        </form>
+      ) : (
       <span
-        onDoubleClick={() => {
-          const newTitle = prompt("Uppdatera din todo", todo.title);
-          if (newTitle && newTitle.trim() !== ""){
-            onChangeTodo(todo.id, newTitle)
-          }
-        }}
-      >
+        onDoubleClick={() => setIsEditing(true)}>
         {todo.title}
       </span>
-
+)}
       <DeleteButton id={todo.id} onDelete={onDelete} />
     </li>
   )
