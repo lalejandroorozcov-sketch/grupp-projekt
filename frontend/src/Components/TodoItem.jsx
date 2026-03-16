@@ -28,7 +28,10 @@ const handleSubmit = (e) => {
         </form>
       ) : (
       <span
-        onDoubleClick={() => setIsEditing(true)}>
+        onDoubleClick={() => setIsEditing(true)}
+        style={{
+                textDecoration: todo.completed ? "line-through" : "none"
+              }}>
         {todo.title}
       </span>
 )}
