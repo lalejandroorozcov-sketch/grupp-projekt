@@ -1,3 +1,5 @@
+/* Mobile-first*/
+
 :root {
   --max-width: 1280px;
   --page-padding: 2rem;
@@ -23,25 +25,12 @@
   will-change: filter;
   transition: filter 300ms;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@media (min-width: 720px) {
+  .todo-form,
+  .todoList {
+    width: min(100%, 620px);
+    margin-inline: auto;
   }
 }
 
@@ -49,23 +38,21 @@
   padding: 2em;
 }
 
-.read-the-docs {
-  color: #888;
-}
+/*centreing todo list and heading also*/
 
-/* Mobile-first centering for heading + todo list */
 .todo-form,
 .todoList {
-  width: min(100%, 480px);
+  width: min(100%, 620px);
   margin-inline: auto;
 }
 
+/*styling of list*/
 .todoList {
-  list-style: none;
   padding: 0;
   margin: 1rem auto;
 }
 
+/*styling of list items*/
 .todoList li {
   display: flex;
   align-items: center;
@@ -77,9 +64,11 @@
   margin-bottom: var(--gap);
 }
 
+/*changes (bigger screens)*/
 @media (min-width: 720px) {
   .todo-form,
   .todoList {
     width: min(100%, 620px);
+    margin-inline: auto;
   }
 }
