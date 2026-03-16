@@ -1,6 +1,6 @@
 import TodoItem from "./TodoItem";
 
-function TodoList({ todos, onDelete, onUpdate }) {
+function TodoList({ todos, onDelete, onUpdate, onChangeTodo }) {
 
     return (
         <>
