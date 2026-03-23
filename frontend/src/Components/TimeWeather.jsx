@@ -59,15 +59,8 @@ function TimeWeather() {
     }, [])
 
     return (
-        <div style={{
-            border: '1px solid black',
-            padding: '10px',
-            borderRadius: '5px',
-            display: 'inline-block',
-            backgroundColor: 'lightblue',
-            top: '10px',
-            right: '10px',
-            position: 'absolute'
+        <div className='time-weather' style={{
+          
         }}>
             {currentTime.toLocaleString('sv-SE', {
                 year: 'numeric',
