@@ -22,14 +22,22 @@
   padding: 2em;
 }
 
+.title, .subtitle {
+  background-color: rgba(22, 31, 31, 0.533);
+  backdrop-filter: blur(5px);
+  border-radius: 10px;
+  padding: 10px;
+}
+
 .title {
   margin-bottom: 10px;
-  color: rgb(143, 7, 18);
+  color: rgb(251, 249, 250);
 }
 
 .subtitle {
   margin-top: 0;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
+  color: rgb(248, 244, 244);
 }
 
 .todo-form {
@@ -40,6 +48,7 @@
 
 .todo-input{
   background-color: rgb(227, 245, 234);
+  color: black;
 }
 
 .todo-form,
