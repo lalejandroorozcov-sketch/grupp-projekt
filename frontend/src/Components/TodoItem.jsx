@@ -61,6 +61,7 @@ function TodoItem({ todo, onDelete, onUpdate, onChangeTodo }) {
       ) : (
         <span
           onDoubleClick={() => setIsEditing(true)}
+          title="Dubbelklicka för att redigera din todo"
           style={{
             textDecoration: todo.completed ? "line-through" : "none"
 
