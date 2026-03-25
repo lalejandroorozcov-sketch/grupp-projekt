@@ -1,4 +1,15 @@
+# Node.js dependencies
 node_modules/
+package-lock.json
+
+# Environment variables
 .env
+
+# Build outputs
 dist/
-/backend/node_modules
+
+# Firebase credentials (VIKTIGT!)
+serviceAccountKey.json
+
+# OS generated files
+.DS_Store
