@@ -19,7 +19,14 @@ function TodoItem({ todo, onDelete, onUpdate, onChangeTodo }) {
 
       const date = new Date(seconds * 1000)
 
-      return date.toLocaleString("sv-SE")
+      return date.toLocaleString("sv-SE", {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+      })
+      
 
     }
 
@@ -72,7 +79,7 @@ function TodoItem({ todo, onDelete, onUpdate, onChangeTodo }) {
 
       <br />
 
-      <small style={{ color: "gray" }}>
+      <small style={{ color: "white" }}>
         Made: {formatDate(todo.createdAt)}
       </small>
       <Fireworks trigger={fireworksTrigger} />
