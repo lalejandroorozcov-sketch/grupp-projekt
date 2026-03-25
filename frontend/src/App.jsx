@@ -4,7 +4,7 @@ import TodoForm from './Components/TodoForm'
 import Title from './Components/Title'
 import TodoList from './Components/TodoList'
 import TimeWeather from './Components/TimeWeather'
-import { getTodos, addTodo as apiAddTodo, deleteTodo as apiDeleteTodo, updateTodo as apiUpdateTodo, changeTodo as apiChangeTodo} from './Api/TodoApi'
+import { getTodos, addTodo as apiAddTodo, deleteTodo as apiDeleteTodo, updateTodo as apiUpdateTodo, changeTodo as apiChangeTodo } from './Api/TodoApi'
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -78,10 +78,9 @@ function App() {
 
   return (
     <>
-    
       <Title />
       <TodoForm onAddTodo={handleAddTodo} />
-      <TodoList todos={todos} onDelete={handleDeleteTodo} onUpdate={handleUpdateTodo} onChangeTodo={handleChangeTodo}/>
+      <TodoList todos={todos} onDelete={handleDeleteTodo} onUpdate={handleUpdateTodo} onChangeTodo={handleChangeTodo} />
       <TimeWeather />
     </>
   )

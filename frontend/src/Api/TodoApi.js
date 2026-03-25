@@ -14,6 +14,10 @@ export const addTodo = async (todo) => {
         body: JSON.stringify(todo),
     })
 
+    if (!response.ok) {
+        throw new Error("Failed to add todo")
+    }
+
     return response.json()
 }
 
@@ -39,10 +43,10 @@ export const deleteTodo = async (id) => {
 
 export const changeTodo = async (id, newTitle) => {
 
-    const response = await fetch (`${baseApi_url}/changeTodo/${id}`, {
+    const response = await fetch(`${baseApi_url}/changeTodo/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json", },
-        body: JSON.stringify({title: newTitle})
+        body: JSON.stringify({ title: newTitle })
     })
     return response.json()
 }

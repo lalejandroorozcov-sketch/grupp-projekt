@@ -49,7 +49,7 @@ app.post('/addTodos', async (req, res) => {
 
     try {
 
-        const { title, completed } = req.body
+        const { title } = req.body
 
         if (!title || title.trim() == "") {
 
@@ -58,7 +58,7 @@ app.post('/addTodos', async (req, res) => {
 
         const newTodo = {
             title,
-            completed: completed || false,
+            completed: false,
             createdAt: admin.firestore.FieldValue.serverTimestamp(),
         }
 
@@ -66,15 +66,18 @@ app.post('/addTodos', async (req, res) => {
 
         // Läs tillbaka det sparade objektet för att få rätt data
         const savedDoc = await docRef.get()
-        const savedTodo = {
+
+        await new Promise(resolve => setTimeout(resolve, 500))
+
+        console.log("sparad data", savedDoc.data())
+
+        res.status(200).json({
             id: savedDoc.id,
             ...savedDoc.data()
-        }
-
-        res.status(200).json(savedTodo)
+        })
 
     } catch (error) {
-
+        console.log(error)
         res.status(500).send('Could not add todo, try again later.')
 
     }
@@ -98,17 +101,17 @@ app.put('/updateTodo/:id', async (req, res) => {
     }
 })
 
-app.put('/changeTodo/:id', async (req, res)=> {
+app.put('/changeTodo/:id', async (req, res) => {
     try {
         const todoID = req.params.id
         const newTitle = req.body.title
 
-        if (!newTitle || newTitle.trim()=== "") {
+        if (!newTitle || newTitle.trim() === "") {
             return res.status(400).send('No new todo title provided.')
         }
 
         const todoRef = db.collection('Todos').doc(todoID)
-        await todoRef.set({title: newTitle}, {merge: true})
+        await todoRef.set({ title: newTitle }, { merge: true })
 
         const changedDoc = await todoRef.get()
         const changedTodo = {
@@ -119,7 +122,7 @@ app.put('/changeTodo/:id', async (req, res)=> {
         res.status(200).json(changedTodo)
 
     } catch (error) {
-       res.status(500).send('Could not change todo title.')
+        res.status(500).send('Could not change todo title.')
     }
 })
 
