@@ -78,7 +78,8 @@ function TimeWeather() {
                     .values[0] - första värdet
                     Math.round() - avrundar till närmaste heltal
                     °C - lägger till grader Celsius */}
-                    {getWeatherIcon(weather.timeSeries[0].parameters.find(p => p.name === 'Wsymb2')?.values[0])} {Math.round(weather.timeSeries[0].parameters.find(p => p.name === 't').values[0])}°C
+                    {getWeatherIcon(weather.timeSeries[0].parameters.find(p => p.name === 'Wsymb2')?.values[0])} 
+                    {Math.round(weather.timeSeries[0].parameters.find(p => p.name === 't').values[0])}°C
                 </div>
             )}
         </div>
