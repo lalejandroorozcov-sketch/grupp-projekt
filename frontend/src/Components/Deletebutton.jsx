@@ -13,7 +13,7 @@ const baseApi_url = "http://localhost:8080"
       console.log("Fel vid borttagning av todo")
     }
   }
-  return <button onClick={handleDelete}>Ta bort</button>
+  return <button onClick={handleDelete}>Remove</button>
 }
 
 export default DeleteButton

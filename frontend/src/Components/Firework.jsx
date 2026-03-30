@@ -7,7 +7,7 @@ function Fireworks({ trigger }) {
     useEffect(() => {
         if (trigger) {
             setVisible(true)
-            const timer = setTimeout(() => {
+             setTimeout(() => {
                 setVisible(false)
             }, 3000)
         }

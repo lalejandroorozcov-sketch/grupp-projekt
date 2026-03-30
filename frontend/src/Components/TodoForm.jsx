@@ -8,7 +8,10 @@ function TodoForm({ onAddTodo }) {
 
     e.preventDefault()
 
-    if (!title.trim()) return ("You have to write somthing.")
+    if (!title.trim()) {
+      console.log("You have to write somthing.")
+      return
+    }
 
     onAddTodo(title)
 
